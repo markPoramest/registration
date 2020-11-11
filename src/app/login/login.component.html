@@ -1,0 +1,26 @@
+<div class = "container">
+<h2 class="display-1">Login</h2>
+<form #loginForm="ngForm" (ngSubmit)="loginUser()" class="was-validated">
+  <div class="form-group">
+    <label for="uname">Email:</label>
+    <input type="email" class="form-control" placeholder="Enter email" name ="email" [(ngModel)]= "user.email" required>
+    <div class="valid-feedback">Valid.</div>
+    <div class="invalid-feedback">Please fill out this field.</div>
+  </div>
+  <div class="form-group">
+    <label for="pwd">Password:</label>
+    <input type="password" class="form-control" placeholder="Enter password" name="password" [(ngModel)]= "user.password" required>
+    <div class="valid-feedback">Valid.</div>
+    <div class="invalid-feedback">Please fill out this field.</div>
+  </div>
+  <div class="form-group form-check">
+    <label class="form-check-label">
+      <input class="form-check-input" type="checkbox" name="remember" required> I agree on policy.
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Check this checkbox to continue.</div>
+    </label>
+  </div>
+  <p><button type="submit" class="btn btn-success">Submit</button>&nbsp;&nbsp;
+    <button type="button" class="btn btn-primary" (click)="gotoRegister()">Register</button></p>
+</form>
+</div>
