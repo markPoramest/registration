@@ -1,66 +1,93 @@
-
+<div class="container">
 <h2 class="display-1">Register</h2>
-<form class="form-horizontal" #RegisterForm="ngForm" (ngSubmit)="registerUser()" >
-  <div class="form-group">
+<form  #RegisterForm="ngForm" (ngSubmit)="registerUser()" >
+  <div  [formGroup]="userForm">
 
+    <div class="form-group">
     <label class="control-label col-sm-2" for="firstName">First Name :</label>
-    <div class="col-sm-10">
-      <input #firstName="ngModel" class="form-control" name="firstName" placeholder="Enter First Name" required [(ngModel)]=user.firstName>
-      
-      <div *ngIf="firstName.invalid" class="alert alert-danger">
-            <div *ngIf="firstName.errors.required">
-                Name is required.
-            </div>
-            <div *ngIf="firstName.errors.minlength">
-                Name must be at least 4 characters long.
-            </div>
+     <input formControlName="firstName" class="form-control" placeholder="Enter First Name" required>
+     <div *ngIf="firstName.invalid"class="text-danger">
+        <div *ngIf="firstName.errors.required" >
+           First Name is required!!.
+      </div>
       </div>
     </div>
-  </div>
 
-  <div class="form-group">
+    <div class="form-group">
     <label class="control-label col-sm-2" for="lastName">Last Name :</label>
-    <div class="col-sm-10">
-      <input type="Last Name" class="form-control" name="Last Name" placeholder="Enter Last Name" required [(ngModel)]=user.lastName>
+     <input formControlName="lastName" class="form-control" placeholder="Enter Last Name" required>
+     <div *ngIf="lastName.invalid"class="text-danger">
+        <div *ngIf="lastName.errors.required">
+           Last Name is required!!.
+      </div>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label class="control-label col-sm-2" for="email">Email:</label>
-    <div class="col-sm-10">
-      <input type="email" class="form-control" name="email" placeholder="Enter email" required [(ngModel)]=user.email>
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="control-label col-sm-2" for="password">Password:</label>
-    <div class="col-sm-10">
-      <input type="password" class="form-control" name="password" placeholder="Enter password" required [(ngModel)]=user.password>
-    </div>
-  </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="email">Email :</label>
+       <input formControlName="email" class="form-control" placeholder="Enter Email" required>
+       <div *ngIf="email.invalid"class="text-danger">
+          <div *ngIf="email.errors.required">
+             Email is required!!.
+        </div>
+        <div *ngIf="email.errors.email">
+          Email is wrong pattern!!.
+        </div>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <p><button type="submit" class="btn btn-success" >Submit</button>&nbsp;&nbsp;
-        <button type="button" class="btn btn-primary" (click)="gotoLogin()">Back to Login</button></p>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="password">Password :</label>
+         <input formControlName="password" type="password" class="form-control" placeholder="Enter Password" required>
+         <div *ngIf="password.invalid"class="text-danger">
+            <div *ngIf="password.errors.required">
+               Password is required!!.
+          </div>
+          <div *ngIf="password.errors.minlength">
+            Password must be at least 8 characters long.
+          </div>
+          </div>
+        </div>
+
+         <div class="form-group">
+        <label class="control-label col-sm-2" for="confirmedPassword">Confirmed Password :</label>
+         <input formControlName="confirmedPassword" type="password" class="form-control" placeholder="Enter Confirmed Password" required>
+         <div *ngIf="confirmedPassword.invalid"class="text-danger">
+            Confirmed Password is required!!.
+          </div>
+          <div *ngIf="confirmedPassword.valid && confirmedPassword.value != password.value" class = "text-danger">
+            Confirmed Password must match!!.
+       </div>
+        </div>
+
+
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <p><button type="submit" class="btn btn-success" [disabled]="userForm.invalid ||confirmedPassword.value != password.value">Submit</button>&nbsp;&nbsp;
+          <button type="button" class="btn btn-primary" (click)="gotoLogin()">Back to Login</button></p>
+      </div>
     </div>
-  </div> 
+
+</div>
 </form>
+</div>
 
 <div class="modal fade" id="ModalSuccess">
   <div class="modal-dialog">
     <div class="modal-content">
-    
+
       <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title">Register Success</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
-      
+
       <!-- Modal body -->
       <div class="modal-body">
         Click OK to back to login menu
       </div>
-      
+
       <!-- Modal footer -->
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="gotoLogin()">OK</button>
@@ -72,18 +99,18 @@
 <div class="modal fade" id="ModalFail">
   <div class="modal-dialog">
     <div class="modal-content">
-    
+
       <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title">Register Fail</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
-      
-      <!-- Modal body -->
+
+      <!-- Modal      body -->
       <div class="modal-body">
         This email was used!
       </div>
-      
+
       <!-- Modal footer -->
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal" >OK</button>

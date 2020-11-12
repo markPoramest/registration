@@ -1,0 +1,33 @@
+
+    <h2 class = "page-header">List of User</h2>
+    <p>Users in Thailand is the land of compromise company</p>          
+    <button type="button" class="btn btn-primary" (click)="gotoLogin()">Back to Login</button>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Password</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor = "let us of user">
+          <td>{{us.id}}</td>
+          <td>{{us.firstName}}</td>
+          <td>{{us.lastName}}</td>
+          <td>{{us.email}}</td>
+          <td>{{us.password}}</td>
+          <td>
+              <button type="button" class="btn btn-primary" (click)="editUser(us.id)">Edit</button>&nbsp;
+              <button type="button" class="btn btn-info" (click)="viewUser(us.id)">View</button>&nbsp;
+              <button type="button" class="btn btn-danger" (click)="deleteUser(us.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+
